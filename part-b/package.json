@@ -1,0 +1,6 @@
+{
+  "name": "expensely-exercise",
+  "private": true,
+  "scripts": { "start": "node mock-server.js" },
+  "devDependencies": { "@playwright/test": "^1.47.0" }
+}
