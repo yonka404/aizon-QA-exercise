@@ -26,12 +26,17 @@ test("approver approves a submitted expense", async ({ request }) => {
 });
 test("rejects a request without a decision", async ({ request }) => {
   const response = await request.post(
-    "http://localhost:3000/expenses/exp_small/approvals",
+    "http://localhost:3000/expenses/exp_large/approvals",
     {
       headers: {
         Authorization: "Bearer tok-manager",
       },
-      data: {},
+      data: {
+        signature: {
+          username: "m.torres",
+          password: "Hunter!2026",
+        },
+      },
     },
   );
 
