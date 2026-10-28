@@ -32,7 +32,7 @@ const send = (res, code, body) => {
 };
 const fail = (res, code, errorCode) => send(res, code, { error: errorCode });
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   const m = req.url.match(/^\/expenses\/([^/]+)\/approvals$/);
   if (req.method === 'GET' && req.url === '/audit') return send(res, 200, audit);
   if (!m || req.method !== 'POST') return send(res, 404, { error: 'notFound' });
@@ -77,4 +77,8 @@ http.createServer((req, res) => {
       resultingStatus: expense.status,
     });
   });
-}).listen(3000, () => console.log('Expensely mock listening on http://localhost:3000'));
+});
+
+server.listen(Number(process.env.PORT ?? 3000), () => {
+  console.log(`Expensely mock listening on http://localhost:${server.address().port}`);
+});
